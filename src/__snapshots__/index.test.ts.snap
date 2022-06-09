@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`unfuXml can clean adwords soap example 1`] = `
+Object {
+  "envelope": Object {
+    "body": Object {
+      "getAdUnitsByStatement": Object {
+        "filterStatement": Object {
+          "query": "WHERE parentId IS NULL LIMIT 500",
+        },
+        "xmlns": "https://www.google.com/apis/ads/publisher/v202205",
+      },
+    },
+    "header": Object {
+      "requestHeader": Object {
+        "actor": "http://schemas.xmlsoap.org/soap/actor/next",
+        "applicationName": "DfpApi-Java-2.1.0-dfp_test",
+        "mustUnderstand": "0",
+        "networkCode": 123456,
+        "ns1": "https://www.google.com/apis/ads/publisher/v202205",
+      },
+    },
+    "soapenv": "http://schemas.xmlsoap.org/soap/envelope/",
+    "xsd": "http://www.w3.org/2001/XMLSchema",
+    "xsi": "http://www.w3.org/2001/XMLSchema-instance",
+  },
+}
+`;
