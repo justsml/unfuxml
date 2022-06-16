@@ -1,5 +1,5 @@
 {
-  "name": "@justsml/unfuxml",
+  "name": "unfuxml",
   "version": "1.0.1",
   "description": "Un-f*ck any XML with a one-way JSON conversion. Customizable, including smart defaults: flattens excess nesting, dedupes, de-namespaces, and preserve arrays.",
   "homepage": "https://github.com/justsml/unfuxml",
