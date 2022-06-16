@@ -1,24 +1,59 @@
 {
-  "name": "clean-xml-to-json",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "@justsml/unfuxml",
+  "version": "1.0.1",
+  "description": "Un-f*ck any XML with a one-way JSON conversion. Customizable, including smart defaults: flattens excess nesting, dedupes, de-namespaces, and preserve arrays.",
+  "homepage": "https://github.com/justsml/unfuxml",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/justsml/unfuxml.git"
+  },
+  "source": "./src/index.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "browser": "./dist/index.global.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prepublishOnly": "NODE_ENV=production BUNDLE_ALL=true npm run build",
+    "release:npm": "npm publish --access public --registry https://registry.npmjs.org/",
+    "release:github": "npm publish --access public --registry https://npm.pkg.github.com/",
+    "test": "jest",
+    "test:coverage": "npm run build && jest --coverage",
+    "build": "npx rimraf ./dist/* && npm run build:bundle",
+    "build:bundle": "./scripts/build.sh",
+    "format": "eslint --fix ."
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": {
+    "name": "Dan Levy",
+    "url": "https://danlevy.net"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  },
   "devDependencies": {
     "@types/jest": "^28.1.1",
     "@types/lodash": "^4.14.182",
     "@types/node": "^17.0.40",
-    "jest": "^28.1.0",
-    "ts-jest": "^28.0.4",
-    "typescript": "^4.7.3"
+    "@typescript-eslint/eslint-plugin": "^4.0.0",
+    "eslint": "^7.0.1",
+    "eslint-config-standard-with-typescript": "^21.0.1",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.0.0",
+    "jest": "26.x.x",
+    "ts-jest": "26.x.x",
+    "ts-node": "^10.7.0",
+    "tsup": "^6.1.2",
+    "typescript": "4.4.4"
   },
   "dependencies": {
     "lodash": "^4.17.21",
     "xml-js": "^1.6.11"
-  }
+  },
+  "license": "BSD-3-Clause",
+  "files": [
+    "dist",
+    "*.md"
+  ]
 }

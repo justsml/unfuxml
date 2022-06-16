@@ -58,7 +58,7 @@ export function _cleanupXml(json: string | Record<string, unknown>, spreadKey = 
     if (Object.hasOwnProperty.call(json, key)) {
       const value = json[key];
       if (typeof json[key] === 'object') {
-    // @ts-expect-error
+        // @ts-expect-error
         json[key] = _cleanupXml(json[key], spreadKey, spreadOrSetValue);
       } else {
         json[key] = value;
