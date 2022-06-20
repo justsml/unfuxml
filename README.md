@@ -19,7 +19,7 @@ Most XML to JSON conversion libraries produce JSON which is less-than-clean, dif
 
 <!-- [See XML's countless edge cases.](#faq-xml-hell) -->
 
-<img style="max-width: 700px;" src="docs/videos/property-conversion-unfuxml-15fps.gif" />
+<img width="700" src="docs/videos/property-conversion-unfuxml-15fps.gif" />
 
 ### Solution
 
