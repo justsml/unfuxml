@@ -17,12 +17,12 @@ Most XML to JSON conversion libraries produce JSON which is less-than-clean, dif
 
 > _Note:_ If 'perfect' bi-directional conversion is required - **this is not the library for you.**.
 
-[See XML's countless edge cases.](#faq-xml-hell)
+<!-- [See XML's countless edge cases.](#faq-xml-hell) -->
 
+<img style="max-width: 700px;" src="docs/videos/property-conversion-unfuxml-15fps.gif" />
 
 ### Solution
 
-<img src="docs/videos/property-conversion-unfuxml-15fps.gif" />
 
 ## Examples
 
