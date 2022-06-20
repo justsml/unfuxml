@@ -1,0 +1,747 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getXmlToJsonStats BaseRateWithConditionalRates: stats 1`] = `
+Object {
+  "inputSize": "3,209",
+  "minified": Object {
+    "clean": "976 (-69.59%)",
+    "preClean": "1,366 (-57.43%)",
+  },
+  "path": "[raw-xml-input-string]",
+  "pretty": Object {
+    "clean": "1,977 (-38.39%)",
+    "preClean": "3,151 (-1.81%)",
+  },
+  "results": Object {
+    "transaction": Object {
+      "id": "42",
+      "result": Object {
+        "baserate": Object {
+          "currency": "USD",
+          "value": 300,
+        },
+        "checkin": "2018-06-10",
+        "nights": 2,
+        "otherFees": Object {
+          "currency": "USD",
+          "value": 2,
+        },
+        "property": 1234,
+        "roomBundle": Object {
+          "_text": "...",
+          "baserate": Object {
+            "currency": "USD",
+            "value": 275,
+          },
+          "chargeCurrency": "web",
+          "custom1": "ratebasic",
+          "custom2": "ratebasic",
+          "internetIncluded": 1,
+          "occupancy": 2,
+          "occupancyDetails": Object {
+            "numAdults": 2,
+          },
+          "otherFees": Object {
+            "currency": "USD",
+            "value": 2,
+          },
+          "packageId": "ABC",
+          "ratePlanId": "5-ABC",
+          "rates": Object {
+            "rate": Array [
+              Object {
+                "baserate": Object {
+                  "currency": "USD",
+                  "value": 258.33,
+                },
+                "chargeCurrency": "hotel",
+                "custom1": "ratecode321",
+                "otherFees": Object {
+                  "currency": "USD",
+                  "value": 1,
+                },
+                "rateRuleId": "mobile",
+                "tax": Object {
+                  "currency": "USD",
+                  "value": 25.83,
+                },
+              },
+              Object {
+                "baserate": Object {
+                  "currency": "USD",
+                  "value": 268.33,
+                },
+                "custom1": "ratecode432",
+                "otherFees": Object {
+                  "currency": "USD",
+                  "value": 1,
+                },
+                "rateRuleId": "us_or_gb",
+                "tax": Object {
+                  "currency": "USD",
+                  "value": 26.83,
+                },
+              },
+            ],
+          },
+          "roomId": 5,
+          "tax": Object {
+            "currency": "USD",
+            "value": 27.5,
+          },
+        },
+        "tax": Object {
+          "currency": "USD",
+          "value": 30,
+        },
+      },
+      "timestamp": "2017-07-18T16:20:00-04:00",
+    },
+  },
+  "runtime": undefined,
+}
+`;
+
+exports[`getXmlToJsonStats PropertyData: stats 1`] = `
+Object {
+  "inputSize": "2,325",
+  "minified": Object {
+    "clean": "1,446 (-37.81%)",
+    "preClean": "1,880 (-19.14%)",
+  },
+  "path": "[raw-xml-input-string]",
+  "pretty": Object {
+    "clean": "3,406 (+46.49%)",
+    "preClean": "4,888 (+110.24%)",
+  },
+  "results": Object {
+    "transaction": Object {
+      "id": "42",
+      "propertyDataSet": Object {
+        "packageData": Array [
+          Object {
+            "breakfastIncluded": 1,
+            "chargeCurrency": "hotel",
+            "description": Object {
+              "text": Array [
+                Object {
+                  "language": "en",
+                  "text": "Continental Breakfast",
+                },
+                Object {
+                  "language": "fr",
+                  "text": "Petit déjeuner continental",
+                },
+              ],
+            },
+            "name": Object {
+              "text": Array [
+                Object {
+                  "language": "en",
+                  "text": "Refundable Room with Breakfast",
+                },
+                Object {
+                  "language": "fr",
+                  "text": "Chambre remboursable avec le petit déjeuner",
+                },
+              ],
+            },
+            "packageId": "refundbreakfast",
+            "refundable": Object {
+              "available": "1",
+              "refundableUntilDays": "3",
+            },
+          },
+          Object {
+            "chargeCurrency": "web",
+            "description": Object {
+              "text": Array [
+                Object {
+                  "language": "en",
+                  "text": "Blah blah blad",
+                },
+                Object {
+                  "language": "fr",
+                  "text": "Le blah blah blad",
+                },
+              ],
+            },
+            "name": Object {
+              "text": Array [
+                Object {
+                  "language": "en",
+                  "text": "Nonrefundable",
+                },
+                Object {
+                  "language": "fr",
+                  "text": "Non remboursable",
+                },
+              ],
+            },
+            "occupancy": 2,
+            "packageId": "prepaid",
+            "refundable": Object {
+              "available": "0",
+            },
+          },
+        ],
+        "property": 12345,
+        "roomData": Array [
+          Object {
+            "capacity": 2,
+            "description": Object {
+              "text": Array [
+                Object {
+                  "language": "en",
+                  "text": "A single room",
+                },
+                Object {
+                  "language": "fr",
+                  "text": "Le chambre simple",
+                },
+              ],
+            },
+            "name": Object {
+              "text": Array [
+                Object {
+                  "language": "en",
+                  "text": "Single room",
+                },
+                Object {
+                  "language": "fr",
+                  "text": "Chambre simple",
+                },
+              ],
+            },
+            "photoUrl": Array [
+              Object {
+                "caption": Object {
+                  "text": Array [
+                    Object {
+                      "language": "en",
+                      "text": "Living area",
+                    },
+                    Object {
+                      "language": "fr",
+                      "text": "Le chambre",
+                    },
+                  ],
+                },
+                "url": "http://www.foo.com/static/bar/image1234.jpg",
+              },
+              Object {
+                "url": "http://www.foo.com/static/bar/image1235.jpg",
+              },
+            ],
+            "roomId": "single",
+          },
+          Object {
+            "name": Object {
+              "text": Array [
+                Object {
+                  "language": "en",
+                  "text": "Double room",
+                },
+                Object {
+                  "language": "fr",
+                  "text": "Chambre double",
+                },
+              ],
+            },
+            "occupancy": 1,
+            "roomId": "double",
+          },
+        ],
+      },
+      "timestamp": "2017-07-18T16:20:00-04:00",
+    },
+  },
+  "runtime": undefined,
+}
+`;
+
+exports[`getXmlToJsonStats RateModifications: stats 1`] = `
+Object {
+  "inputSize": "1,814",
+  "minified": Object {
+    "clean": "1,282 (-29.33%)",
+    "preClean": "1,650 (-9.04%)",
+  },
+  "path": "[raw-xml-input-string]",
+  "pretty": Object {
+    "clean": "2,512 (+38.48%)",
+    "preClean": "3,551 (+95.76%)",
+  },
+  "results": Object {
+    "rateModifications": Object {
+      "hotelRateModifications": Object {
+        "action": "overlay",
+        "hotelId": "hotel-id-123-abc",
+        "itineraryRateModification": Object {
+          "action": "delete",
+          "bookingDates": Object {
+            "dateRange": Array [
+              Object {
+                "daysOfWeek": "M",
+                "end": "2030-04-15",
+                "start": "2030-04-15",
+              },
+              Object {
+                "daysOfWeek": "M",
+                "end": "2030-04-15",
+                "start": "2030-04-15",
+              },
+            ],
+          },
+          "bookingWindow": Object {
+            "max": "integer",
+            "min": "integer",
+          },
+          "checkinDates": Object {
+            "dateRange": Object {
+              "daysOfWeek": "M",
+              "end": "2030-04-15",
+              "start": "2030-04-15",
+            },
+          },
+          "checkoutDates": Object {
+            "dateRange": Object {
+              "daysOfWeek": "M",
+              "end": "2030-04-15",
+              "start": "2030-04-15",
+            },
+          },
+          "devices": Object {
+            "device": Object {
+              "type": "desktop",
+            },
+          },
+          "id": "357238795",
+          "lengthOfStay": Object {
+            "max": "integer",
+            "min": "integer",
+          },
+          "minimumAmount": Object {
+            "beforeDiscount": "integer",
+          },
+          "modificationActions": Object {
+            "availability": Object {
+              "status": "unavailable",
+            },
+            "priceAdjustment": Object {
+              "multiplier": "float",
+            },
+            "rateRule": Object {
+              "id": "9876",
+            },
+            "refundable": Object {
+              "available": "false",
+              "refundableUntilDays": "1",
+              "refundableUntilTime": "time",
+            },
+          },
+          "ratePlans": Object {
+            "ratePlan": Array [
+              Object {
+                "id": "PackageID_1",
+              },
+              Object {
+                "id": "PackageID_2",
+              },
+            ],
+          },
+          "roomTypes": Object {
+            "roomType": Array [
+              Object {
+                "id": "RoomID_1",
+              },
+              Object {
+                "id": "RoomID_2",
+              },
+            ],
+          },
+          "stayDates": Object {
+            "application": "all",
+            "dateRange": Object {
+              "daysOfWeek": "M",
+              "end": "2030-04-15",
+              "start": "2030-04-15",
+            },
+          },
+          "userCountries": Object {
+            "country": Object {
+              "code": "USA",
+            },
+            "type": "include",
+          },
+        },
+      },
+      "id": "B78BA3ED-31C5-44D7-80F7-69E12AEAA1BD",
+      "partner": "partner_key",
+      "timestamp": "timestamp",
+    },
+  },
+  "runtime": undefined,
+}
+`;
+
+exports[`getXmlToJsonStats SingleOccupancyBundle: stats 1`] = `
+Object {
+  "inputSize": "4,860",
+  "minified": Object {
+    "clean": "1,898 (-60.95%)",
+    "preClean": "2,558 (-47.37%)",
+  },
+  "path": "[raw-xml-input-string]",
+  "pretty": Object {
+    "clean": "3,653 (-24.84%)",
+    "preClean": "5,713 (+17.55%)",
+  },
+  "results": Object {
+    "transaction": Object {
+      "id": "12345678",
+      "propertyDataSet": Object {
+        "packageData": Array [
+          Object {
+            "chargeCurrency": "web",
+            "internetIncluded": 1,
+            "occupancy": 1,
+            "packageId": "P11111",
+            "parkingIncluded": 1,
+            "refundable": Object {
+              "available": "1",
+              "refundableUntilDays": "7",
+              "refundableUntilTime": "18:00:00",
+            },
+          },
+          Object {
+            "chargeCurrency": "web",
+            "internetIncluded": 1,
+            "occupancy": 2,
+            "packageId": "P54321",
+            "parkingIncluded": 1,
+            "refundable": Object {
+              "available": "1",
+              "refundableUntilDays": "7",
+              "refundableUntilTime": "18:00:00",
+            },
+          },
+          Object {
+            "chargeCurrency": "web",
+            "internetIncluded": 1,
+            "occupancy": 4,
+            "packageId": "P12345",
+            "parkingIncluded": 1,
+            "refundable": Object {
+              "available": "1",
+              "refundableUntilDays": "1",
+              "refundableUntilTime": "18:00:00",
+            },
+          },
+        ],
+        "property": 180054,
+        "roomData": Array [
+          Object {
+            "capacity": 4,
+            "name": Object {
+              "text": Array [
+                Object {
+                  "language": "en",
+                  "text": "Single Queen Room - Non-Smoking",
+                },
+                Object {
+                  "language": "fr",
+                  "text": "Chambre de la Roi Premium - Pas de Fumeurs",
+                },
+              ],
+            },
+            "roomId": 60773,
+          },
+          Object {
+            "capacity": 4,
+            "name": Object {
+              "text": Array [
+                Object {
+                  "language": "en",
+                  "text": "Premium King Room - Non-Smoking",
+                },
+                Object {
+                  "language": "fr",
+                  "text": "Chambre de le Roi Premium - Pas de Fumeurs",
+                },
+              ],
+            },
+            "roomId": 436233,
+          },
+        ],
+      },
+      "result": Object {
+        "baserate": Object {
+          "currency": "USD",
+          "value": 199.99,
+        },
+        "checkin": "2017-10-07",
+        "nights": 2,
+        "occupancy": 2,
+        "occupancyDetails": Object {
+          "numAdults": 2,
+        },
+        "otherFees": Object {
+          "currency": "USD",
+          "value": 2,
+        },
+        "property": 180054,
+        "roomBundle": Array [
+          Object {
+            "baserate": Object {
+              "currency": "USD",
+              "value": 199.99,
+            },
+            "otherFees": Object {
+              "currency": "USD",
+              "value": 2,
+            },
+            "packageId": "P54321",
+            "ratePlanId": "060773-P54321",
+            "roomId": 60773,
+            "tax": Object {
+              "currency": "USD",
+              "value": 25.12,
+            },
+          },
+          Object {
+            "baserate": Object {
+              "currency": "USD",
+              "value": 174.99,
+            },
+            "otherFees": Object {
+              "currency": "USD",
+              "value": 2,
+            },
+            "packageId": "P11111",
+            "ratePlanId": "060773-P11111",
+            "roomId": 60773,
+            "tax": Object {
+              "currency": "USD",
+              "value": 22.08,
+            },
+          },
+          Object {
+            "baserate": Object {
+              "currency": "USD",
+              "value": 298.88,
+            },
+            "otherFees": Object {
+              "currency": "USD",
+              "value": 10,
+            },
+            "packageId": "P12345",
+            "ratePlanId": "436233-P12345",
+            "roomId": 436233,
+            "tax": Object {
+              "currency": "USD",
+              "value": 42.12,
+            },
+          },
+        ],
+        "tax": Object {
+          "currency": "USD",
+          "value": 25.12,
+        },
+      },
+      "timestamp": "2017-07-18T16:20:00-04:00",
+    },
+  },
+  "runtime": undefined,
+}
+`;
+
+exports[`getXmlToJsonStats Transaction: stats 1`] = `
+Object {
+  "inputSize": "1,157",
+  "minified": Object {
+    "clean": "847 (-26.79%)",
+    "preClean": "999 (-13.66%)",
+  },
+  "path": "[raw-xml-input-string]",
+  "pretty": Object {
+    "clean": "1,450 (+25.32%)",
+    "preClean": "1,919 (+65.86%)",
+  },
+  "results": Object {
+    "transaction": Object {
+      "id": "42",
+      "propertyDataSet": Object {
+        "property": 1234,
+        "roomData": Object {
+          "capacity": 4,
+          "description": Object {
+            "text": Array [
+              Object {
+                "language": "en",
+                "text": "One king bed with pillowtop mattresses, 300-thread-count linens,
+            and down comforters (bedspreads). City view. 300 square feet. Desk with
+            rolling chair. Multi-line phone with voice mail. Cable/satellite TV with
+            complimentary HBO and pay movies.",
+              },
+              Object {
+                "language": "fr",
+                "text": "Un très grand lit avec matelas à plateau-coussin, ...",
+              },
+            ],
+          },
+          "name": Object {
+            "text": Array [
+              Object {
+                "language": "en",
+                "text": "Single King Bed Room",
+              },
+              Object {
+                "language": "fr",
+                "text": "Simple Lit de Roi",
+              },
+            ],
+          },
+          "photoUrl": Object {
+            "caption": Object {
+              "text": Array [
+                Object {
+                  "language": "en",
+                  "text": "Bathroom View",
+                },
+                Object {
+                  "language": "fr",
+                  "text": "La salle de baines",
+                },
+              ],
+            },
+            "url": "http://www.foo.com/static/bar/image1234.jpg",
+          },
+          "roomId": "5440OF",
+        },
+      },
+      "timestamp": "2017-07-18T16:20:00-04:00",
+    },
+  },
+  "runtime": undefined,
+}
+`;
+
+exports[`getXmlToJsonStats TransactionMultiRate: stats 1`] = `
+Object {
+  "inputSize": "1,521",
+  "minified": Object {
+    "clean": "1,027 (-32.48%)",
+    "preClean": "1,421 (-6.57%)",
+  },
+  "path": "[raw-xml-input-string]",
+  "pretty": Object {
+    "clean": "2,294 (+50.82%)",
+    "preClean": "3,474 (+128.40%)",
+  },
+  "results": Object {
+    "transaction": Object {
+      "id": "42",
+      "result": Object {
+        "baserate": Object {
+          "currency": "USD",
+          "value": 3196.1,
+        },
+        "checkin": "2021-01-13",
+        "nights": 9,
+        "occupancy": 2,
+        "otherFees": Object {
+          "currency": "USD",
+          "value": 543.34,
+        },
+        "property": 1234,
+        "rates": Object {
+          "rate": Array [
+            Object {
+              "baserate": Object {
+                "currency": "USD",
+                "value": 3196.1,
+              },
+              "occupancy": 1,
+              "otherFees": Object {
+                "currency": "USD",
+                "value": 543.34,
+              },
+              "tax": Object {
+                "currency": "USD",
+                "value": 559.49,
+              },
+            },
+            Object {
+              "baserate": Object {
+                "currency": "USD",
+                "value": 3196.1,
+              },
+              "occupancy": 3,
+              "otherFees": Object {
+                "currency": "USD",
+                "value": 543.34,
+              },
+              "tax": Object {
+                "currency": "USD",
+                "value": 559.49,
+              },
+            },
+            Object {
+              "baserate": Object {
+                "currency": "USD",
+                "value": 3196.1,
+              },
+              "occupancy": 4,
+              "otherFees": Object {
+                "currency": "USD",
+                "value": 543.34,
+              },
+              "tax": Object {
+                "currency": "USD",
+                "value": 559.49,
+              },
+            },
+            Object {
+              "baserate": Object {
+                "currency": "USD",
+                "value": 3196.1,
+              },
+              "occupancy": 5,
+              "otherFees": Object {
+                "currency": "USD",
+                "value": 543.34,
+              },
+              "tax": Object {
+                "currency": "USD",
+                "value": 559.49,
+              },
+            },
+            Object {
+              "baserate": Object {
+                "currency": "USD",
+                "value": 3196.1,
+              },
+              "occupancy": 6,
+              "otherFees": Object {
+                "currency": "USD",
+                "value": 543.34,
+              },
+              "tax": Object {
+                "currency": "USD",
+                "value": 559.49,
+              },
+            },
+          ],
+        },
+        "tax": Object {
+          "currency": "USD",
+          "value": 559.49,
+        },
+      },
+      "timestamp": "2020-07-23T16:20:00-04:00",
+    },
+  },
+  "runtime": undefined,
+}
+`;

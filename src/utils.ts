@@ -8,7 +8,7 @@ const numberFormatter = new Intl.NumberFormat('en-US', {
 });
 
 function getPercentChange(num1: number, num2: number) {
-  return (num2 - num1) / num1 * 100;
+  return ((num2 - num1) / num1) * 100;
 }
 
 function isPathLikeString(str: string) {
@@ -24,6 +24,7 @@ export interface XmlJsonStatsOptions {
   includeProcessedJson?: boolean
   includePercentChange?: boolean
   formatNumber?: boolean
+  includeRuntime?: boolean
 }
 
 /**
@@ -31,7 +32,7 @@ export interface XmlJsonStatsOptions {
  *
  * ```json
  * {
- *   path: '/Users/danlevy/code/he/xml-test/data/HotelDescriptiveInfoRS.xml',
+ *   path: './data/HotelDescriptiveInfoRS.xml',
  *   xmlInputSize: '4,816',
  *   jsonPrettyPreClean: '7,357 (52.76%)',
  *   jsonMinifiedPreClean: '3,145 (-34.70%)',
@@ -44,18 +45,23 @@ export interface XmlJsonStatsOptions {
  * @param {*} options
  * @returns
  */
-export function getXmlToJsonStats(xmlPathOrString: string, {
-  includeProcessedJson = false,
-  includePercentChange = true,
-  formatNumber = true,
-}: XmlJsonStatsOptions = {},
-xmlParserOptions: XmlParserOptions = { alwaysArray: false }
+export function getXmlToJsonStats(
+  xmlPathOrString: string,
+  {
+    includeProcessedJson = false,
+    includePercentChange = true,
+    formatNumber = true,
+    includeRuntime = true,
+  }: XmlJsonStatsOptions = {},
+  xmlParserOptions: XmlParserOptions = { alwaysArray: false }
 ) {
   const innerFnWrapper = trackExecutionTime(() => {
     const $parseXml = trackExecutionTime(_parseXml);
     const $cleanupXml = trackExecutionTime(_cleanupXml);
     const isXmlFilePath = isPathLikeString(xmlPathOrString);
-    const xmlData = isXmlFilePath ? fs.readFileSync(xmlPathOrString, 'utf8') : xmlPathOrString;
+    const xmlData = isXmlFilePath
+      ? fs.readFileSync(xmlPathOrString, 'utf8')
+      : xmlPathOrString;
 
     const parsedJson = $parseXml(xmlData, xmlParserOptions);
     const jsonPrettyPreClean = JSON.stringify(parsedJson, null, 2);
@@ -67,14 +73,32 @@ xmlParserOptions: XmlParserOptions = { alwaysArray: false }
     const cleanupRuntime = $cleanupXml.runtime;
 
     const getPercentDiff = (sizeToCompare: number) => {
-      const displaySize = formatNumber ? formatInteger(sizeToCompare) : sizeToCompare;
+      const displaySize = formatNumber
+        ? formatInteger(sizeToCompare)
+        : sizeToCompare;
       const percentChange = getPercentChange(xmlData.length, sizeToCompare);
       const signPrefix = percentChange < 0 ? '' : '+';
-      return `${displaySize}${(includePercentChange ? ` (${signPrefix}${percentChange.toFixed(2)}%)` : '')}`;
+      return `${displaySize}${
+        includePercentChange
+          ? ` (${signPrefix}${percentChange.toFixed(2)}%)`
+          : ''
+      }`;
     };
 
-    const resultSummary = {
-      path: isXmlFilePath ? xmlPathOrString : '[no-path: raw-xml-string]',
+    const runtime = !includeRuntime
+      ? undefined
+      : {
+          cleanup: cleanupRuntime,
+          parse: parseRuntime,
+          total: undefined,
+        };
+
+    const results = !includeProcessedJson
+      ? undefined
+      : cleanedJson;
+
+    return {
+      path: isXmlFilePath ? xmlPathOrString : '[raw-xml-input-string]',
       inputSize: formatInteger(xmlData.length),
       pretty: {
         preClean: getPercentDiff(jsonPrettyPreClean.length),
@@ -84,24 +108,13 @@ xmlParserOptions: XmlParserOptions = { alwaysArray: false }
         preClean: getPercentDiff(jsonMinifiedPreClean.length),
         clean: getPercentDiff(jsonMinifiedClean.length),
       },
-      runtime: {
-        cleanup: cleanupRuntime,
-        parse: parseRuntime,
-      },
+      runtime,
+      results,
     };
-
-    if (includeProcessedJson) {
-      Object.defineProperty(resultSummary, 'results', {
-        enumerable: false,
-        writable: false,
-        value: cleanedJson,
-        get() { return this.value; },
-      });
-    }
-    return resultSummary;
   });
+
   const results = innerFnWrapper();
-  results.runtime.total = innerFnWrapper.runtime;
+  if (includeRuntime) results.runtime.total = innerFnWrapper.runtime;
   return results;
 }
 
@@ -109,10 +122,10 @@ function formatInteger(num: number) {
   return numberFormatter.format(num);
 }
 
-type TimedFunction<TFunc = Function> = (TFunc & {
+type TimedFunction<TFunc = Function> = TFunc & {
   startTime?: number
   runtime?: number
-});
+};
 
 const trackExecutionTime: TimedFunction = (fn: Function) => {
   const wrappedFn: TimedFunction = (...args: unknown[]) => {

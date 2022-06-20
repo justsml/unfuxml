@@ -1,10 +1,10 @@
-import camelCase from 'lodash/camelCase.js'
+import camelCase from 'lodash/camelCase.js';
 import omit from 'lodash/omit.js';
 import convert from 'xml-js';
 
 export interface XmlParserOptions {
-  alwaysArray?: boolean | string[];
-  fixKeyNameFunction?: (value: string) => string;
+  alwaysArray?: boolean | string[]
+  fixKeyNameFunction?: (value: string) => string
 }
 
 export function unfuXml(xmlData: string, xmlParserOptions: XmlParserOptions = {}): object {
@@ -26,7 +26,7 @@ export function _parseXml(xmlData: string, { alwaysArray = false, fixKeyNameFunc
     alwaysArray,
     elementNameFn: fixKeyNameFunction,
     attributeNameFn: fixKeyNameFunction,
-    instructionNameFn: fixKeyNameFunction
+    instructionNameFn: fixKeyNameFunction,
   }));
 }
 
@@ -43,12 +43,12 @@ export function _cleanupXml(json: string | Record<string, unknown>, spreadKey = 
     json = json[spreadKey];
   } else if (keys.includes(spreadKey)) {
     // @ts-expect-error
-    const properties = { ...json[spreadKey] }
+    const properties = { ...json[spreadKey] };
     json = omit(json, spreadKey);
     json = { ...json, ...properties };
     // Duplicate the check on spreadOrSetValue
     // @ts-expect-error
-    if (keys.includes(spreadOrSetValue) && !Object.hasOwnProperty.call(json, 'value')) json.value = json[spreadOrSetValue]
+    if (keys.includes(spreadOrSetValue) && !Object.hasOwnProperty.call(json, 'value')) json.value = json[spreadOrSetValue];
     // @ts-expect-error
     json = omit(json, spreadOrSetValue);
   }

@@ -1,9 +1,12 @@
-import { unfuXml } from './index';
+import { omit } from 'lodash';
+import { unfuXml, getXmlToJsonStats } from './index';
+import { XmlFixtures } from './__fixtures__';
 
 describe('unfuXml', () => {
   it('can clean adwords soap example', () => {
     const xml = getSampleXml();
     const result = unfuXml(xml);
+
     expect(result).toEqual({
       envelope: {
         body: {
@@ -28,6 +31,37 @@ describe('unfuXml', () => {
         xsi: 'http://www.w3.org/2001/XMLSchema-instance',
       },
     });
+  });
+});
+
+describe('getXmlToJsonStats', () => {
+  const opts = {
+    includeProcessedJson: true,
+    includeRuntime: false,
+  };
+  it('BaseRateWithConditionalRates', () => {
+    const result = getXmlToJsonStats(XmlFixtures.BaseRateWithConditionalRates, opts);
+    expect(result).toMatchSnapshot('stats');
+  });
+  it('PropertyData', () => {
+    const result = getXmlToJsonStats(XmlFixtures.PropertyData, opts);
+    expect(result).toMatchSnapshot('stats');
+  });
+  it('RateModifications', () => {
+    const result = getXmlToJsonStats(XmlFixtures.RateModifications, opts);
+    expect(result).toMatchSnapshot('stats');
+  });
+  it('SingleOccupancyBundle', () => {
+    const result = getXmlToJsonStats(XmlFixtures.SingleOccupancyBundle, opts);
+    expect(result).toMatchSnapshot('stats');
+  });
+  it('Transaction', () => {
+    const result = getXmlToJsonStats(XmlFixtures.Transaction, opts);
+    expect(result).toMatchSnapshot('stats');
+  });
+  it('TransactionMultiRate', () => {
+    const result = getXmlToJsonStats(XmlFixtures.TransactionMultiRate, opts);
+    expect(result).toMatchSnapshot('stats');
   });
 });
 
