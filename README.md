@@ -1,6 +1,6 @@
 # unfuxml 🛠✨
 
-[![CI Status](https://github.com/justsml/unfuxml/workflows/test/badge.svg)](https://github.com/justsml/unfuxml/actions)
+[![test](https://github.com/justsml/unfuxml/actions/workflows/test.yml/badge.svg)](https://github.com/justsml/unfuxml/actions/workflows/test.yml)
 [![NPM version](https://img.shields.io/npm/v/@justsml/unfuxml.svg)](https://www.npmjs.com/package/@justsml/unfuxml)
 [![GitHub stars](https://img.shields.io/github/stars/justsml/unfuxml.svg?style=social)](https://github.com/justsml/unfuxml)
 <!-- [![Dependency Status](https://img.shields.io/david/justsml/unfuxml.svg)](https://david-dm.org/justsml/unfuxml) -->
