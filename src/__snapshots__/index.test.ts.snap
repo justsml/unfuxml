@@ -2,17 +2,7 @@
 
 exports[`getXmlToJsonStats BaseRateWithConditionalRates: stats 1`] = `
 Object {
-  "inputSize": "3,209",
-  "minified": Object {
-    "clean": "976 (-69.59%)",
-    "preClean": "1,366 (-57.43%)",
-  },
-  "path": "[raw-xml-input-string]",
-  "pretty": Object {
-    "clean": "1,977 (-38.39%)",
-    "preClean": "3,151 (-1.81%)",
-  },
-  "results": Object {
+  "output": Object {
     "transaction": Object {
       "id": "42",
       "result": Object {
@@ -98,23 +88,24 @@ Object {
       "timestamp": "2017-07-18T16:20:00-04:00",
     },
   },
-  "runtime": undefined,
+  "path": "[xml-string]",
+  "sizes": Object {
+    "input": "3,209",
+    "minified": Object {
+      "clean": "976 (-69.59%)",
+      "preClean": "1,366 (-57.43%)",
+    },
+    "pretty": Object {
+      "clean": "1,977 (-38.39%)",
+      "preClean": "3,151 (-1.81%)",
+    },
+  },
 }
 `;
 
 exports[`getXmlToJsonStats PropertyData: stats 1`] = `
 Object {
-  "inputSize": "2,325",
-  "minified": Object {
-    "clean": "1,446 (-37.81%)",
-    "preClean": "1,880 (-19.14%)",
-  },
-  "path": "[raw-xml-input-string]",
-  "pretty": Object {
-    "clean": "3,406 (+46.49%)",
-    "preClean": "4,888 (+110.24%)",
-  },
-  "results": Object {
+  "output": Object {
     "transaction": Object {
       "id": "42",
       "propertyDataSet": Object {
@@ -256,23 +247,24 @@ Object {
       "timestamp": "2017-07-18T16:20:00-04:00",
     },
   },
-  "runtime": undefined,
+  "path": "[xml-string]",
+  "sizes": Object {
+    "input": "2,325",
+    "minified": Object {
+      "clean": "1,446 (-37.81%)",
+      "preClean": "1,880 (-19.14%)",
+    },
+    "pretty": Object {
+      "clean": "3,406 (+46.49%)",
+      "preClean": "4,888 (+110.24%)",
+    },
+  },
 }
 `;
 
 exports[`getXmlToJsonStats RateModifications: stats 1`] = `
 Object {
-  "inputSize": "1,814",
-  "minified": Object {
-    "clean": "1,282 (-29.33%)",
-    "preClean": "1,650 (-9.04%)",
-  },
-  "path": "[raw-xml-input-string]",
-  "pretty": Object {
-    "clean": "2,512 (+38.48%)",
-    "preClean": "3,551 (+95.76%)",
-  },
-  "results": Object {
+  "output": Object {
     "rateModifications": Object {
       "hotelRateModifications": Object {
         "action": "overlay",
@@ -381,23 +373,24 @@ Object {
       "timestamp": "timestamp",
     },
   },
-  "runtime": undefined,
+  "path": "[xml-string]",
+  "sizes": Object {
+    "input": "1,814",
+    "minified": Object {
+      "clean": "1,282 (-29.33%)",
+      "preClean": "1,650 (-9.04%)",
+    },
+    "pretty": Object {
+      "clean": "2,512 (+38.48%)",
+      "preClean": "3,551 (+95.76%)",
+    },
+  },
 }
 `;
 
 exports[`getXmlToJsonStats SingleOccupancyBundle: stats 1`] = `
 Object {
-  "inputSize": "4,860",
-  "minified": Object {
-    "clean": "1,898 (-60.95%)",
-    "preClean": "2,558 (-47.37%)",
-  },
-  "path": "[raw-xml-input-string]",
-  "pretty": Object {
-    "clean": "3,653 (-24.84%)",
-    "preClean": "5,713 (+17.55%)",
-  },
-  "results": Object {
+  "output": Object {
     "transaction": Object {
       "id": "12345678",
       "propertyDataSet": Object {
@@ -552,23 +545,24 @@ Object {
       "timestamp": "2017-07-18T16:20:00-04:00",
     },
   },
-  "runtime": undefined,
+  "path": "[xml-string]",
+  "sizes": Object {
+    "input": "4,860",
+    "minified": Object {
+      "clean": "1,898 (-60.95%)",
+      "preClean": "2,558 (-47.37%)",
+    },
+    "pretty": Object {
+      "clean": "3,653 (-24.84%)",
+      "preClean": "5,713 (+17.55%)",
+    },
+  },
 }
 `;
 
 exports[`getXmlToJsonStats Transaction: stats 1`] = `
 Object {
-  "inputSize": "1,157",
-  "minified": Object {
-    "clean": "847 (-26.79%)",
-    "preClean": "999 (-13.66%)",
-  },
-  "path": "[raw-xml-input-string]",
-  "pretty": Object {
-    "clean": "1,450 (+25.32%)",
-    "preClean": "1,919 (+65.86%)",
-  },
-  "results": Object {
+  "output": Object {
     "transaction": Object {
       "id": "42",
       "propertyDataSet": Object {
@@ -623,23 +617,142 @@ Object {
       "timestamp": "2017-07-18T16:20:00-04:00",
     },
   },
-  "runtime": undefined,
+  "path": "[xml-string]",
+  "sizes": Object {
+    "input": "1,157",
+    "minified": Object {
+      "clean": "847 (-26.79%)",
+      "preClean": "999 (-13.66%)",
+    },
+    "pretty": Object {
+      "clean": "1,450 (+25.32%)",
+      "preClean": "1,919 (+65.86%)",
+    },
+  },
+}
+`;
+
+exports[`getXmlToJsonStats TransactionMultiRate: Unwrapped Lists: stats 1`] = `
+Object {
+  "output": Object {
+    "transaction": Object {
+      "id": "42",
+      "result": Object {
+        "baserate": Object {
+          "currency": "USD",
+          "value": 3196.1,
+        },
+        "checkin": "2021-01-13",
+        "nights": 9,
+        "occupancy": 2,
+        "otherFees": Object {
+          "currency": "USD",
+          "value": 543.34,
+        },
+        "property": 1234,
+        "rates": Array [
+          Object {
+            "baserate": Object {
+              "currency": "USD",
+              "value": 3196.1,
+            },
+            "occupancy": 1,
+            "otherFees": Object {
+              "currency": "USD",
+              "value": 543.34,
+            },
+            "tax": Object {
+              "currency": "USD",
+              "value": 559.49,
+            },
+          },
+          Object {
+            "baserate": Object {
+              "currency": "USD",
+              "value": 3196.1,
+            },
+            "occupancy": 3,
+            "otherFees": Object {
+              "currency": "USD",
+              "value": 543.34,
+            },
+            "tax": Object {
+              "currency": "USD",
+              "value": 559.49,
+            },
+          },
+          Object {
+            "baserate": Object {
+              "currency": "USD",
+              "value": 3196.1,
+            },
+            "occupancy": 4,
+            "otherFees": Object {
+              "currency": "USD",
+              "value": 543.34,
+            },
+            "tax": Object {
+              "currency": "USD",
+              "value": 559.49,
+            },
+          },
+          Object {
+            "baserate": Object {
+              "currency": "USD",
+              "value": 3196.1,
+            },
+            "occupancy": 5,
+            "otherFees": Object {
+              "currency": "USD",
+              "value": 543.34,
+            },
+            "tax": Object {
+              "currency": "USD",
+              "value": 559.49,
+            },
+          },
+          Object {
+            "baserate": Object {
+              "currency": "USD",
+              "value": 3196.1,
+            },
+            "occupancy": 6,
+            "otherFees": Object {
+              "currency": "USD",
+              "value": 543.34,
+            },
+            "tax": Object {
+              "currency": "USD",
+              "value": 559.49,
+            },
+          },
+        ],
+        "tax": Object {
+          "currency": "USD",
+          "value": 559.49,
+        },
+      },
+      "timestamp": "2020-07-23T16:20:00-04:00",
+    },
+  },
+  "path": "[xml-string]",
+  "sizes": Object {
+    "input": "1,521",
+    "minified": Object {
+      "clean": "1,018 (-33.07%)",
+      "preClean": "1,421 (-6.57%)",
+    },
+    "pretty": Object {
+      "clean": "2,116 (+39.12%)",
+      "preClean": "3,474 (+128.40%)",
+    },
+  },
 }
 `;
 
 exports[`getXmlToJsonStats TransactionMultiRate: stats 1`] = `
 Object {
-  "inputSize": "1,521",
-  "minified": Object {
-    "clean": "1,027 (-32.48%)",
-    "preClean": "1,421 (-6.57%)",
-  },
-  "path": "[raw-xml-input-string]",
-  "pretty": Object {
-    "clean": "2,294 (+50.82%)",
-    "preClean": "3,474 (+128.40%)",
-  },
-  "results": Object {
+  "output": Object {
     "transaction": Object {
       "id": "42",
       "result": Object {
@@ -742,6 +855,17 @@ Object {
       "timestamp": "2020-07-23T16:20:00-04:00",
     },
   },
-  "runtime": undefined,
+  "path": "[xml-string]",
+  "sizes": Object {
+    "input": "1,521",
+    "minified": Object {
+      "clean": "1,027 (-32.48%)",
+      "preClean": "1,421 (-6.57%)",
+    },
+    "pretty": Object {
+      "clean": "2,294 (+50.82%)",
+      "preClean": "3,474 (+128.40%)",
+    },
+  },
 }
 `;

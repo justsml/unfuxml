@@ -1,9 +1,38 @@
 
 /**
- * Credit: Google Developer Docs:
- * https://developers.google.com/
+ * Credit: **Google Developer Docs**
+ *
+ * - https://developers.google.com/
+ * - https://developers.google.com/hotels/hotel-prices/xml-reference/transaction-messages#transaction-examples
+ * - https://developers.google.com/ad-manager/api/soap_xml#requiredheaders
+ *
  */
 export const XmlFixtures = {
+  /**
+   * Source: <https://developers.google.com/ad-manager/api/soap_xml#requiredheaders>
+   */
+  GoogleAdManagerQuery: `<?xml version="1.0" encoding="UTF-8"?>
+  <soapenv:Envelope
+          xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+          xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <soapenv:Header>
+      <ns1:RequestHeader
+           soapenv:actor="http://schemas.xmlsoap.org/soap/actor/next"
+           soapenv:mustUnderstand="0"
+           xmlns:ns1="https://www.google.com/apis/ads/publisher/v202205">
+        <ns1:networkCode>123456</ns1:networkCode>
+        <ns1:applicationName>DfpApi-Java-2.1.0-dfp_test</ns1:applicationName>
+      </ns1:RequestHeader>
+    </soapenv:Header>
+    <soapenv:Body>
+      <getAdUnitsByStatement xmlns="https://www.google.com/apis/ads/publisher/v202205">
+        <filterStatement>
+          <query>WHERE parentId IS NULL LIMIT 500</query>
+        </filterStatement>
+      </getAdUnitsByStatement>
+    </soapenv:Body>
+  </soapenv:Envelope>`,
   RateModifications: `<?xml version="1.0" encoding="UTF-8"?>
   <RateModifications partner="partner_key" id="B78BA3ED-31C5-44D7-80F7-69E12AEAA1BD" timestamp="timestamp">
     <HotelRateModifications hotel_id="hotel-id-123-abc" action="overlay">
@@ -47,7 +76,7 @@ export const XmlFixtures = {
       </ItineraryRateModification>
     </HotelRateModifications>
   </RateModifications>`,
-
+  /** Credit: https://developers.google.com/hotels/hotel-prices/xml-reference/ */
   Transaction: `<?xml version="1.0" encoding="UTF-8"?>
   <Transaction timestamp="2017-07-18T16:20:00-04:00" id="42">
     <PropertyDataSet>
@@ -76,6 +105,7 @@ export const XmlFixtures = {
       </RoomData>
     </PropertyDataSet>
   </Transaction>`,
+  /** Credit: https://developers.google.com/hotels/hotel-prices/xml-reference/ */
   PropertyData: `<?xml version="1.0" encoding="UTF-8"?>
   <Transaction timestamp="2017-07-18T16:20:00-04:00" id="42">
     <!-- A transaction message with room types result. -->
@@ -141,6 +171,7 @@ export const XmlFixtures = {
       </PackageData>
     </PropertyDataSet>
   </Transaction>`,
+  /** Credit: https://developers.google.com/hotels/hotel-prices/xml-reference/ */
   TransactionMultiRate: `<?xml version="1.0" encoding="UTF-8"?>
   <Transaction timestamp="2020-07-23T16:20:00-04:00" id="42">
     <Result>
@@ -185,7 +216,7 @@ export const XmlFixtures = {
       </Rates>
     </Result>
   </Transaction>`,
-
+  /** Credit: https://developers.google.com/hotels/hotel-prices/xml-reference/ */
   BaseRateWithConditionalRates: `<?xml version="1.0" encoding="UTF-8" ?>
   <Transaction timestamp="2017-07-18T16:20:00-04:00" id="42">
     <Result>
@@ -261,7 +292,7 @@ export const XmlFixtures = {
       </RoomBundle>
     </Result>
   </Transaction>`,
-
+  /** Credit: https://developers.google.com/hotels/hotel-prices/xml-reference/ */
   SingleOccupancyBundle: `<?xml version="1.0" encoding="UTF-8" ?>
   <!-- Efficient method of defining Room Bundles-->
   <Transaction timestamp="2017-07-18T16:20:00-04:00" id="12345678">
@@ -379,5 +410,4 @@ export const XmlFixtures = {
            property for 1 or more occupancies..-->
     </Result>
   </Transaction>`,
-
 };

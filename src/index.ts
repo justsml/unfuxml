@@ -1,7 +1,8 @@
 export { getXmlToJsonStats, XmlJsonStatsOptions } from './utils';
-export { unfuXml, XmlParserOptions, _cleanupXml, _parseXml } from './unfuXml';
+export { unfuxml, _cleanupXml, _parseXml } from './unfuxml';
+export * from './types';
 
-export { unfuXml as default } from './unfuXml';
+export { unfuxml as default } from './unfuxml';
 
 // import path from "path";
 // const result = getXmlToJsonStats(path.resolve('data/HotelDescriptiveInfoRS.xml'));

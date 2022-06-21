@@ -23,6 +23,24 @@ Most XML to JSON conversion libraries produce JSON which is less-than-clean, dif
 
 ### Solution
 
+An XML to JSON converter with practical assumptions, and configurable "escape hatches" where appropriate.
+
+Unfuxml features:
+
+- [ ] Key/Node name Transformation
+  - [x] Camel-cases by default.
+  - [x] Key rewriting function.
+  - [ ] Removes namespace prefixes, customize the `keyNameFunction` option to override.
+  - [ ] Configurable.
+  - [ ] Supports dictionary for simple remapping of poorly named source data.
+- [ ] Included stats helper functions. (Test out your XML using [`repl.it`](https://repl.it/) or [`runkit.com/new`](https://runkit.com/new))
+
+
+
+
+## Usage
+
+
 
 ## Examples
 

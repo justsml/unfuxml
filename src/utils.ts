@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import { XmlParserOptions, _cleanupXml, _parseXml } from './unfuXml';
+import { _cleanupXml, _parseXml } from './unfuxml';
+import { XmlParserOptions } from './types';
 
 const numberFormatter = new Intl.NumberFormat('en-US', {
   minimumFractionDigits: 0,
@@ -25,12 +26,14 @@ export interface XmlJsonStatsOptions {
   includePercentChange?: boolean
   formatNumber?: boolean
   includeRuntime?: boolean
+  collapseNestedLists?: boolean
 }
 
 /**
  * Emits stats about the XML-to-JSON conversion.
  *
- * ```json
+ * ```ts
+ * getXmlToJsonStats(xmlString, {})
  * {
  *   path: './data/HotelDescriptiveInfoRS.xml',
  *   xmlInputSize: '4,816',
@@ -52,6 +55,7 @@ export function getXmlToJsonStats(
     includePercentChange = true,
     formatNumber = true,
     includeRuntime = true,
+    collapseNestedLists = false,
   }: XmlJsonStatsOptions = {},
   xmlParserOptions: XmlParserOptions = { alwaysArray: false }
 ) {
@@ -67,7 +71,7 @@ export function getXmlToJsonStats(
     const jsonPrettyPreClean = JSON.stringify(parsedJson, null, 2);
     const jsonMinifiedPreClean = JSON.stringify(parsedJson);
     const parseRuntime = $parseXml.runtime;
-    const cleanedJson = $cleanupXml(parsedJson);
+    const cleanedJson = $cleanupXml(parsedJson, { collapseNestedLists });
     const jsonPrettyClean = JSON.stringify(cleanedJson, null, 2);
     const jsonMinifiedClean = JSON.stringify(cleanedJson);
     const cleanupRuntime = $cleanupXml.runtime;
@@ -86,30 +90,34 @@ export function getXmlToJsonStats(
     };
 
     const runtime = !includeRuntime
-      ? undefined
+      ? {}
       : {
-          cleanup: cleanupRuntime,
-          parse: parseRuntime,
-          total: undefined,
+          runtime: {
+            cleanup: cleanupRuntime,
+            parse: parseRuntime,
+            total: undefined,
+          },
         };
 
-    const results = !includeProcessedJson
-      ? undefined
-      : cleanedJson;
+    const output = !includeProcessedJson
+      ? {}
+      : { output: cleanedJson };
 
     return {
-      path: isXmlFilePath ? xmlPathOrString : '[raw-xml-input-string]',
-      inputSize: formatInteger(xmlData.length),
-      pretty: {
-        preClean: getPercentDiff(jsonPrettyPreClean.length),
-        clean: getPercentDiff(jsonPrettyClean.length),
+      ...output,
+      path: isXmlFilePath ? path.basename(xmlPathOrString) : '[xml-string]',
+      ...runtime,
+      sizes: {
+        input: formatInteger(xmlData.length),
+        pretty: {
+          preClean: getPercentDiff(jsonPrettyPreClean.length),
+          clean: getPercentDiff(jsonPrettyClean.length),
+        },
+        minified: {
+          preClean: getPercentDiff(jsonMinifiedPreClean.length),
+          clean: getPercentDiff(jsonMinifiedClean.length),
+        },
       },
-      minified: {
-        preClean: getPercentDiff(jsonMinifiedPreClean.length),
-        clean: getPercentDiff(jsonMinifiedClean.length),
-      },
-      runtime,
-      results,
     };
   });
 
@@ -127,8 +135,8 @@ type TimedFunction<TFunc = Function> = TFunc & {
   runtime?: number
 };
 
-const trackExecutionTime: TimedFunction = (fn: Function) => {
-  const wrappedFn: TimedFunction = (...args: unknown[]) => {
+const trackExecutionTime: TimedFunction = <TFunc extends Function>(fn: TFunc) => {
+  const wrappedFn: TimedFunction = (...args: unknown[]): TimedFunction<TFunc> => {
     const start = Date.now();
     wrappedFn.startTime = start;
     const result = fn(...args);
