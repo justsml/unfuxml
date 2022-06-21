@@ -4,6 +4,93 @@ import { XmlJsonStatsOptions } from './types';
 import { XmlFixtures } from './__fixtures__';
 
 describe('unfuxml', () => {
+  it('can handle mixed-node lists', () => {
+    const input = `<?xml version="1.0" encoding="utf-8"?>
+<Plan importance="high" logged="true">
+  <title>Daily tasks</title>
+  <todo>Work</todo>
+  <todo>Play</todo>
+</Plan>`;
+    const result = getXmlToJsonStats(input, {
+      includeProcessedJson: true,
+      includeRuntime: false,
+    });
+    expect(result.output).toEqual({
+      plan: {
+        importance: 'high',
+        logged: 'true',
+        title: 'Daily tasks',
+        todo: [
+          'Work',
+          'Play',
+        ],
+      },
+    });
+    expect(result).toMatchSnapshot('stats');
+  });
+
+  it('can unwrap "*List" suffixed arrays', () => {
+    const result = unfuxml(`<?xml version="1.0" encoding="UTF-8"?>
+<StateList>
+  <State name="CA" />
+  <State name="CO" />
+  <State name="WA" />
+</StateList>`, {
+      unwrapLists: true,
+      alwaysArray: ['StateList'],
+    });
+    expect(result).toEqual({
+      stateList: [
+        { name: 'CA' },
+        { name: 'CO' },
+        { name: 'WA' },
+      ],
+    });
+  });
+
+  it('can preserve object nesting', () => {
+    const result = unfuxml(`<?xml version="1.0" encoding="UTF-8"?>
+<StateList>
+  <State name="CA" />
+  <State name="CO" />
+  <State name="WA" />
+</StateList>`, {
+      unwrapLists: false,
+      alwaysArray: ['StateList'],
+    });
+    expect(result).toEqual({
+      stateList: {
+        state: [
+          { name: 'CA' },
+          { name: 'CO' },
+          { name: 'WA' },
+        ],
+      },
+    });
+  });
+
+  it('can output empty array when no child nodes present', () => {
+    const result = unfuxml(`<?xml version="1.0" encoding="UTF-8"?>
+    <StateList></StateList>`, {
+      alwaysArray: ['stateList'],
+    });
+    expect(result).toHaveProperty('stateList');
+    // @ts-ignore
+    expect(result?.stateList).toHaveLength(0);
+  });
+
+  it('can preserve arrays with a single child node', () => {
+    const result = unfuxml(`<?xml version="1.0" encoding="UTF-8"?>
+<StateList>
+  <State name="CO" />
+</StateList>`, {
+      alwaysArray: ['stateList'],
+    });
+    expect(result).toHaveProperty('stateList');
+    // @ts-ignore
+    expect(result?.stateList).toHaveLength(1);
+  });
+
   it('can clean adWords soap example', () => {
     const result = unfuxml(XmlFixtures.GoogleAdManagerQuery);
 
@@ -31,63 +118,6 @@ describe('unfuxml', () => {
         xsi: 'http://www.w3.org/2001/XMLSchema-instance',
       },
     });
-  });
-
-  it('can unwrap "*List" suffixed arrays', () => {
-    const result = unfuxml(XmlFixtures.StateList, {
-      unwrapLists: true,
-      alwaysArray: ['StateList'],
-    });
-    // process.stdout.write('Test #1' + JSON.stringify(result, null, 2) + '\n');
-    expect(result).toEqual({
-      stateList: [
-        { name: 'CA' },
-        { name: 'CO' },
-        { name: 'WA' },
-      ],
-    });
-  });
-
-  it('can preserve object nesting', () => {
-    const result = unfuxml(XmlFixtures.StateList, {
-      unwrapLists: false,
-      alwaysArray: ['StateList'],
-    });
-    // process.stdout.write('Test #1 ' + JSON.stringify(result, null, 2) + '\n');
-    expect(result).toEqual({
-      stateList: {
-        state: [
-          { name: 'CA' },
-          { name: 'CO' },
-          { name: 'WA' },
-        ],
-      },
-    });
-  });
-
-  it('can output empty array when no child nodes present', () => {
-    const result = unfuxml(XmlFixtures.StateSetEmptyList, {
-      alwaysArray: ['stateList'],
-    });
-    expect(result).toHaveProperty('stateList');
-    // @ts-ignore
-    expect(result?.stateList).toHaveLength(0);
-  });
-
-  it('can preserve arrays with a single child node', () => {
-    const result = unfuxml(XmlFixtures.StateSetOfOne, {
-      alwaysArray: ['stateList'],
-    });
-    expect(result).toHaveProperty('stateList');
-    // @ts-ignore
-    expect(result?.stateList).toHaveLength(1);
-  });
-  it('can handle mixed-node lists (PolymorphicNodes)', () => {
-    const result = getXmlToJsonStats(XmlFixtures.PolymorphicNodeList, {
-      includeProcessedJson: true,
-      includeRuntime: false,
-    });
-    expect(result).toMatchSnapshot('stats');
   });
 });
 
@@ -123,14 +153,12 @@ describe('getXmlToJsonStats', () => {
   it('TransactionMultiRate: Preserve original wrapping', () => {
     const myOpt: XmlJsonStatsOptions = { ...opts, unwrapLists: false };
     const result = getXmlToJsonStats(XmlFixtures.TransactionMultiRate, myOpt);
-    // process.stdout.write('Test #2' + JSON.stringify(result, null, 2) + '\n');
     expect(result).toMatchSnapshot('preserveWrapping');
   });
   it('TransactionMultiRate: Unwrapped Lists', () => {
     const myOpt = { ...opts, unwrapLists: true };
     const result = getXmlToJsonStats(XmlFixtures.TransactionMultiRate, myOpt);
     const { rates } = result.output?.transaction?.result;
-    // process.stdout.write('Test #3' + JSON.stringify(result, null, 2) + '\n');
     expect(typeof result.output.transaction.result).toBe('object');
     expect(Array.isArray(rates)).toBe(true);
     expect(result).toMatchSnapshot('applyUnwrapping');

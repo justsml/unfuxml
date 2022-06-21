@@ -7,29 +7,6 @@
  *
  */
 export const XmlFixtures = {
-  /** Awkward jumbling of node types */
-  PolymorphicNodeList: `<?xml version="1.0" encoding="utf-8"?>
-<Plan importance="high" logged="true">
-  <title>Daily tasks</title>
-  <todo>Work</todo>
-  <todo>Play</todo>
-</Plan>`,
-  /** Lists example */
-  StateList: `<?xml version="1.0" encoding="UTF-8"?>
-<StateList>
-  <State name="CA" />
-  <State name="CO" />
-  <State name="WA" />
-</StateList>`,
-  /** Lists example */
-  StateSetOfOne: `<?xml version="1.0" encoding="UTF-8"?>
-<StateList>
-  <State name="CO" />
-</StateList>`,
-  /** Lists example */
-  StateSetEmptyList: `<?xml version="1.0" encoding="UTF-8"?>
-<StateList></StateList>`,
-
   /**
    * Source: <https://developers.google.com/ad-manager/api/soap_xml#requiredheaders>
    */

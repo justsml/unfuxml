@@ -980,7 +980,7 @@ Object {
 }
 `;
 
-exports[`unfuxml can handle mixed-node lists (PolymorphicNodes): stats 1`] = `
+exports[`unfuxml can handle mixed-node lists: stats 1`] = `
 Object {
   "output": Object {
     "plan": Object {
