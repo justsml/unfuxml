@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { _cleanupXml, _parseXml } from './unfuxml';
-import { XmlParserOptions } from './types';
+import { UnfuxmlOptions, XmlJsonStatsOptions } from './types';
 
 const numberFormatter = new Intl.NumberFormat('en-US', {
   minimumFractionDigits: 0,
@@ -19,14 +19,6 @@ function isPathLikeString(str: string) {
     console.error(error);
     return false;
   }
-}
-
-export interface XmlJsonStatsOptions {
-  includeProcessedJson?: boolean
-  includePercentChange?: boolean
-  formatNumber?: boolean
-  includeRuntime?: boolean
-  collapseNestedLists?: boolean
 }
 
 /**
@@ -51,13 +43,14 @@ export interface XmlJsonStatsOptions {
 export function getXmlToJsonStats(
   xmlPathOrString: string,
   {
+    unwrapLists = true,
     includeProcessedJson = false,
     includePercentChange = true,
     formatNumber = true,
     includeRuntime = true,
-    collapseNestedLists = false,
+    currentTimestamp = () => Date.now(),
   }: XmlJsonStatsOptions = {},
-  xmlParserOptions: XmlParserOptions = { alwaysArray: false }
+  xmlParserOptions: UnfuxmlOptions = { alwaysArray: false }
 ) {
   const innerFnWrapper = trackExecutionTime(() => {
     const $parseXml = trackExecutionTime(_parseXml);
@@ -71,7 +64,7 @@ export function getXmlToJsonStats(
     const jsonPrettyPreClean = JSON.stringify(parsedJson, null, 2);
     const jsonMinifiedPreClean = JSON.stringify(parsedJson);
     const parseRuntime = $parseXml.runtime;
-    const cleanedJson = $cleanupXml(parsedJson, { collapseNestedLists });
+    const cleanedJson = $cleanupXml(parsedJson, { unwrapLists });
     const jsonPrettyClean = JSON.stringify(cleanedJson, null, 2);
     const jsonMinifiedClean = JSON.stringify(cleanedJson);
     const cleanupRuntime = $cleanupXml.runtime;
@@ -135,20 +128,22 @@ type TimedFunction<TFunc = Function> = TFunc & {
   runtime?: number
 };
 
-const trackExecutionTime: TimedFunction = <TFunc extends Function>(fn: TFunc) => {
+const trackExecutionTime: TimedFunction = <TFunc extends Function>(
+  fn: TFunc,
+  currentTimestamp = () => Date.now()
+) => {
   const wrappedFn: TimedFunction = (...args: unknown[]): TimedFunction<TFunc> => {
-    const start = Date.now();
+    const start = currentTimestamp();
     wrappedFn.startTime = start;
     const result = fn(...args);
     if (result?.finally instanceof Function) {
       return result.finally(() => {
-        const end = Date.now();
+        const end = currentTimestamp();
         const time = end - start;
         wrappedFn.runtime = time;
-        // console.log(`Async${fn.name} took ${time}ms`);
       });
     } else {
-      const end = Date.now();
+      const end = currentTimestamp();
       const time = end - start;
       wrappedFn.runtime = time;
       // console.log(`${fn.name} took ${time}ms`);

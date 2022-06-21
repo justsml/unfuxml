@@ -15,37 +15,136 @@
 
 Most XML to JSON conversion libraries produce JSON which is less-than-clean, difficult-to-traverse, and verbose.
 
-> _Note:_ If 'perfect' bi-directional conversion is required - **this is not the library for you.**.
+<!-- > _Note:_ If 'perfect' bi-directional conversion is required - **this is not the library for you.**. -->
 
 <!-- [See XML's countless edge cases.](#faq-xml-hell) -->
 
+> Hint: Hit the Play icon on the animation below:
+
+<!-- markdownlint-disable -->
 <img width="700" src="docs/videos/property-conversion-unfuxml-15fps.gif" />
+<!-- markdownlint-enable -->
 
 ### Solution
 
-An XML to JSON converter with practical assumptions, and configurable "escape hatches" where appropriate.
+An XML to JSON converter with configurable (practical) assumptions.
+And "escape hatches" where appropriate.
 
-Unfuxml features:
+`Unfuxml` features:
 
-- [ ] Key/Node name Transformation
+- [x] One-way conversion.
+- [x] De-nesting of XML's excess nesting.
+- [ ] Key/Node name transformation.
   - [x] Camel-cases by default.
   - [x] Key rewriting function.
   - [ ] Removes namespace prefixes, customize the `keyNameFunction` option to override.
   - [ ] Configurable.
   - [ ] Supports dictionary for simple remapping of poorly named source data.
-- [ ] Included stats helper functions. (Test out your XML using [`repl.it`](https://repl.it/) or [`runkit.com/new`](https://runkit.com/new))
-
-
-
+- [ ] Included stats helper functions. Try `import {getXmlToJsonStats} from 'unfuxml';`
+- (Test out your XML using [`repl.it`](https://repl.it/) or [`runkit.com/new`](https://runkit.com/new))
 
 ## Usage
 
+- Default [`unfuxml()` function](#unfuxml-).
+- Helper `getXmlToJsonStats` method.
 
+### `unfuxml(xml, options)`
 
-## Examples
+#### Example #1
 
+```ts
+import lodash from 'lodash';
+import unfuxml from 'unfuxml';
 
-### Example #1
+const xmlString = `<?xml version="1.0" encoding="UTF-8"?>
+<StateList>
+  <State name="CA" />
+  <State name="CO" />
+  <State name="WA" />
+</StateList>`;
+
+const results = unfuxml(xmlString);
+
+console.log(results);
+/*
+{
+  stateList: [
+    { name: 'CA' },
+    { name: 'CO' },
+    { name: 'WA' },
+  ],
+}
+*/
+```
+
+#### Example #2
+
+Ensure certain named nodes containing a single-Element can be treated as an array.
+
+> Enabled by the `alwaysArray: ['StateList']` option.
+
+```ts
+import lodash from 'lodash';
+import unfuxml from 'unfuxml';
+
+const xmlString = `<?xml version="1.0" encoding="UTF-8"?>
+<StateList>
+  <State name="CA" />
+</StateList>`;
+
+console.log(unfuxml(xmlString, {
+  alwaysArray: ['StateList'],
+}));
+/*
+{ stateList: [ { name: 'CA' } ] }
+*/
+
+// Without the `alwaysArray` option, single-Element
+//   containing nodes are treated as singular objects.
+console.log(unfuxml(xmlString, {
+  alwaysArray: false, // Disable by default.
+}));
+/*
+{ stateList: { name: 'CA' } }
+*/
+```
+
+#### Example #3 (w/ Options)
+
+```ts
+import lodash from 'lodash';
+import unfuxml from 'unfuxml';
+import {promises as fs} from 'fs';
+
+(async () => {
+  const xmlString = await fs.readFile(path.resolve('./input.xml'), 'utf8');
+  const results = unfuxml(xmlString, {
+    alwaysArray: ['StateList'],
+    unwrapLists: false,
+    keyNameFunction: (keyName: string) => lodash.snakeCase(keyName),
+  });
+  console.log(results);
+  /*
+{
+  stateList: [
+    { name: 'CA' },
+    { name: 'CO' },
+    { name: 'WA' },
+  ],
+}
+  */
+})();
+
+```
+
+<br>
+
+## Input & Output Samples
+
+### Sample: Hotel Query
+
+<details>
+  <summary>Hotel Rates Transaction: XML</summary>
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -93,6 +192,11 @@ Unfuxml features:
   </Result>
 </Transaction>
 ```
+
+</details>
+
+<details>
+  <summary>JSON Results</summary>
 
 ```json
 {
@@ -146,7 +250,14 @@ Unfuxml features:
 }
 ```
 
-### Example #2
+</details>
+
+<br>
+
+### Sample: Hotel Property Data Set
+
+<details>
+  <summary>Hotel Property Data Set: XML</summary>
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -221,6 +332,11 @@ Unfuxml features:
   </PropertyDataSet>
 </Transaction>
 ```
+
+</details>
+
+<details>
+  <summary>JSON Results</summary>
 
 ```json
 {
@@ -313,7 +429,14 @@ Unfuxml features:
 }
 ```
 
-### Example #3
+</details>
+
+<br>
+
+### Sample: Hotel Rate Modification
+
+<details>
+  <summary>Hotel Rate Modification: XML</summary>
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -382,6 +505,11 @@ Unfuxml features:
 </RateModifications>
 ```
 
+</details>
+
+<details>
+  <summary>JSON Results</summary>
+
 ```json
 {
   "rateModifications": {
@@ -433,14 +561,19 @@ Unfuxml features:
 }
 ```
 
+</details>
+
+<br>
+<br>
+
 ## TODO
 
-### Support De-nesting Common Object-Array Patterns
+### DONE: ~Support De-nesting Common Object-Array Patterns~
 
 ```js
 {
   "propertyDataSet": Object {
-    "packageData": Array [
+    "propertyData": Array [
       Object {}
   }
 }
@@ -454,10 +587,11 @@ Unfuxml features:
 
 ```
 
+## FAQ
 
-### FAQ: Xml Hell
+### Xml Hell
 
-#### Potentially Lossy XML Features/Structure
+#### Potentially Lossy Situations
 
-- Representing: Multiple CDATA siblings comingled with Nodes in a Node List.
-- Heavy reliance on namespacing. AKA Tag Name prefixes, before the `:`.
+- Representing: Multiple CDATA siblings co-mingled with Nodes in a Node List.
+- Heavy reliance on namespaces. AKA Tag Name collisions when ignoring prefixes (the bit before the `:`.)

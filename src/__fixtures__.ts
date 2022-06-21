@@ -1,4 +1,3 @@
-
 /**
  * Credit: **Google Developer Docs**
  *
@@ -8,6 +7,22 @@
  *
  */
 export const XmlFixtures = {
+  /** Lists example */
+  StateList: `<?xml version="1.0" encoding="UTF-8"?>
+<StateList>
+  <State name="CA" />
+  <State name="CO" />
+  <State name="WA" />
+</StateList>`,
+  /** Lists example */
+  StateSetOfOne: `<?xml version="1.0" encoding="UTF-8"?>
+<StateList>
+  <State name="CO" />
+</StateList>`,
+  /** Lists example */
+  StateSetEmptyList: `<?xml version="1.0" encoding="UTF-8"?>
+<StateList></StateList>`,
+
   /**
    * Source: <https://developers.google.com/ad-manager/api/soap_xml#requiredheaders>
    */

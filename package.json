@@ -1,7 +1,7 @@
 {
   "name": "unfuxml",
-  "version": "1.0.1",
-  "description": "Un-f*ck any XML with a one-way JSON conversion. Customizable, including smart defaults: flattens excess nesting, dedupes, de-namespaces, and preserve arrays.",
+  "version": "2.0.0",
+  "description": "Un-f*ck any XML with a one-way JSON conversion. Customizable, including smart defaults: flattens excess nesting, de-dupes, de-namespaces, and preserve arrays.",
   "homepage": "https://github.com/justsml/unfuxml",
   "repository": {
     "type": "git",
@@ -22,7 +22,7 @@
     "build:bundle": "./scripts/build.sh",
     "format": "eslint --fix ."
   },
-  "keywords": [],
+  "keywords": ["JSON", "XML", "converter", "conversion", "toJSON", "formatter", "transformer", "unfuxml"],
   "author": {
     "name": "Dan Levy",
     "url": "https://danlevy.net"

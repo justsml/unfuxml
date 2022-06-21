@@ -37,43 +37,41 @@ Object {
           },
           "packageId": "ABC",
           "ratePlanId": "5-ABC",
-          "rates": Object {
-            "rate": Array [
-              Object {
-                "baserate": Object {
-                  "currency": "USD",
-                  "value": 258.33,
-                },
-                "chargeCurrency": "hotel",
-                "custom1": "ratecode321",
-                "otherFees": Object {
-                  "currency": "USD",
-                  "value": 1,
-                },
-                "rateRuleId": "mobile",
-                "tax": Object {
-                  "currency": "USD",
-                  "value": 25.83,
-                },
+          "rates": Array [
+            Object {
+              "baserate": Object {
+                "currency": "USD",
+                "value": 258.33,
               },
-              Object {
-                "baserate": Object {
-                  "currency": "USD",
-                  "value": 268.33,
-                },
-                "custom1": "ratecode432",
-                "otherFees": Object {
-                  "currency": "USD",
-                  "value": 1,
-                },
-                "rateRuleId": "us_or_gb",
-                "tax": Object {
-                  "currency": "USD",
-                  "value": 26.83,
-                },
+              "chargeCurrency": "hotel",
+              "custom1": "ratecode321",
+              "otherFees": Object {
+                "currency": "USD",
+                "value": 1,
               },
-            ],
-          },
+              "rateRuleId": "mobile",
+              "tax": Object {
+                "currency": "USD",
+                "value": 25.83,
+              },
+            },
+            Object {
+              "baserate": Object {
+                "currency": "USD",
+                "value": 268.33,
+              },
+              "custom1": "ratecode432",
+              "otherFees": Object {
+                "currency": "USD",
+                "value": 1,
+              },
+              "rateRuleId": "us_or_gb",
+              "tax": Object {
+                "currency": "USD",
+                "value": 26.83,
+              },
+            },
+          ],
           "roomId": 5,
           "tax": Object {
             "currency": "USD",
@@ -92,11 +90,11 @@ Object {
   "sizes": Object {
     "input": "3,209",
     "minified": Object {
-      "clean": "976 (-69.59%)",
+      "clean": "967 (-69.87%)",
       "preClean": "1,366 (-57.43%)",
     },
     "pretty": Object {
-      "clean": "1,977 (-38.39%)",
+      "clean": "1,879 (-41.45%)",
       "preClean": "3,151 (-1.81%)",
     },
   },
@@ -304,9 +302,7 @@ Object {
             },
           },
           "devices": Object {
-            "device": Object {
-              "type": "desktop",
-            },
+            "type": "desktop",
           },
           "id": "357238795",
           "lengthOfStay": Object {
@@ -332,26 +328,22 @@ Object {
               "refundableUntilTime": "time",
             },
           },
-          "ratePlans": Object {
-            "ratePlan": Array [
-              Object {
-                "id": "PackageID_1",
-              },
-              Object {
-                "id": "PackageID_2",
-              },
-            ],
-          },
-          "roomTypes": Object {
-            "roomType": Array [
-              Object {
-                "id": "RoomID_1",
-              },
-              Object {
-                "id": "RoomID_2",
-              },
-            ],
-          },
+          "ratePlans": Array [
+            Object {
+              "id": "PackageID_1",
+            },
+            Object {
+              "id": "PackageID_2",
+            },
+          ],
+          "roomTypes": Array [
+            Object {
+              "id": "RoomID_1",
+            },
+            Object {
+              "id": "RoomID_2",
+            },
+          ],
           "stayDates": Object {
             "application": "all",
             "dateRange": Object {
@@ -377,11 +369,11 @@ Object {
   "sizes": Object {
     "input": "1,814",
     "minified": Object {
-      "clean": "1,282 (-29.33%)",
+      "clean": "1,245 (-31.37%)",
       "preClean": "1,650 (-9.04%)",
     },
     "pretty": Object {
-      "clean": "2,512 (+38.48%)",
+      "clean": "2,380 (+31.20%)",
       "preClean": "3,551 (+95.76%)",
     },
   },
@@ -632,7 +624,7 @@ Object {
 }
 `;
 
-exports[`getXmlToJsonStats TransactionMultiRate: Unwrapped Lists: stats 1`] = `
+exports[`getXmlToJsonStats TransactionMultiRate: Defaults: usingDefaults 1`] = `
 Object {
   "output": Object {
     "transaction": Object {
@@ -750,7 +742,7 @@ Object {
 }
 `;
 
-exports[`getXmlToJsonStats TransactionMultiRate: stats 1`] = `
+exports[`getXmlToJsonStats TransactionMultiRate: Preserve original wrapping: preserveWrapping 1`] = `
 Object {
   "output": Object {
     "transaction": Object {
@@ -864,6 +856,124 @@ Object {
     },
     "pretty": Object {
       "clean": "2,294 (+50.82%)",
+      "preClean": "3,474 (+128.40%)",
+    },
+  },
+}
+`;
+
+exports[`getXmlToJsonStats TransactionMultiRate: Unwrapped Lists: applyUnwrapping 1`] = `
+Object {
+  "output": Object {
+    "transaction": Object {
+      "id": "42",
+      "result": Object {
+        "baserate": Object {
+          "currency": "USD",
+          "value": 3196.1,
+        },
+        "checkin": "2021-01-13",
+        "nights": 9,
+        "occupancy": 2,
+        "otherFees": Object {
+          "currency": "USD",
+          "value": 543.34,
+        },
+        "property": 1234,
+        "rates": Array [
+          Object {
+            "baserate": Object {
+              "currency": "USD",
+              "value": 3196.1,
+            },
+            "occupancy": 1,
+            "otherFees": Object {
+              "currency": "USD",
+              "value": 543.34,
+            },
+            "tax": Object {
+              "currency": "USD",
+              "value": 559.49,
+            },
+          },
+          Object {
+            "baserate": Object {
+              "currency": "USD",
+              "value": 3196.1,
+            },
+            "occupancy": 3,
+            "otherFees": Object {
+              "currency": "USD",
+              "value": 543.34,
+            },
+            "tax": Object {
+              "currency": "USD",
+              "value": 559.49,
+            },
+          },
+          Object {
+            "baserate": Object {
+              "currency": "USD",
+              "value": 3196.1,
+            },
+            "occupancy": 4,
+            "otherFees": Object {
+              "currency": "USD",
+              "value": 543.34,
+            },
+            "tax": Object {
+              "currency": "USD",
+              "value": 559.49,
+            },
+          },
+          Object {
+            "baserate": Object {
+              "currency": "USD",
+              "value": 3196.1,
+            },
+            "occupancy": 5,
+            "otherFees": Object {
+              "currency": "USD",
+              "value": 543.34,
+            },
+            "tax": Object {
+              "currency": "USD",
+              "value": 559.49,
+            },
+          },
+          Object {
+            "baserate": Object {
+              "currency": "USD",
+              "value": 3196.1,
+            },
+            "occupancy": 6,
+            "otherFees": Object {
+              "currency": "USD",
+              "value": 543.34,
+            },
+            "tax": Object {
+              "currency": "USD",
+              "value": 559.49,
+            },
+          },
+        ],
+        "tax": Object {
+          "currency": "USD",
+          "value": 559.49,
+        },
+      },
+      "timestamp": "2020-07-23T16:20:00-04:00",
+    },
+  },
+  "path": "[xml-string]",
+  "sizes": Object {
+    "input": "1,521",
+    "minified": Object {
+      "clean": "1,018 (-33.07%)",
+      "preClean": "1,421 (-6.57%)",
+    },
+    "pretty": Object {
+      "clean": "2,116 (+39.12%)",
       "preClean": "3,474 (+128.40%)",
     },
   },
