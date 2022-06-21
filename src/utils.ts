@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { _cleanupXml, _parseXml } from './unfuxml';
+import { _cleanupXml, _parseXml } from './';
 import { UnfuxmlOptions, XmlJsonStatsOptions } from './types';
 
 const numberFormatter = new Intl.NumberFormat('en-US', {

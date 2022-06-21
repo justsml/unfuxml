@@ -979,3 +979,31 @@ Object {
   },
 }
 `;
+
+exports[`unfuxml can handle mixed-node lists (PolymorphicNodes): stats 1`] = `
+Object {
+  "output": Object {
+    "plan": Object {
+      "importance": "high",
+      "logged": "true",
+      "title": "Daily tasks",
+      "todo": Array [
+        "Work",
+        "Play",
+      ],
+    },
+  },
+  "path": "[xml-string]",
+  "sizes": Object {
+    "input": "154",
+    "minified": Object {
+      "clean": "91 (-40.91%)",
+      "preClean": "137 (-11.04%)",
+    },
+    "pretty": Object {
+      "clean": "142 (-7.79%)",
+      "preClean": "250 (+62.34%)",
+    },
+  },
+}
+`;

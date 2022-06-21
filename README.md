@@ -568,22 +568,13 @@ import {promises as fs} from 'fs';
 
 ## TODO
 
-### DONE: ~Support De-nesting Common Object-Array Patterns~
+### [x] ~~~Support De-nesting Common Object-Array Patterns~~~
 
 ```js
-{
-  "propertyDataSet": Object {
-    "propertyData": Array [
-      Object {}
-  }
-}
-
-// Should become single set/array
-{
-  "propertyDataSet": Array [
-    Object {}
-  ]
-}
+// ❌ Instead of this:
+{ "propertyDataSet": { "propertyData": [ {} ] } }
+// ✅ Should instead collapse to a single set/array
+{ "propertyDataSet": [ {} ] }
 
 ```
 

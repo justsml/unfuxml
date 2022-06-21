@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/prefer-ts-expect-error */
 import { unfuxml, getXmlToJsonStats } from './index';
 import { XmlJsonStatsOptions } from './types';
 import { XmlFixtures } from './__fixtures__';
@@ -64,13 +65,13 @@ describe('unfuxml', () => {
     });
   });
 
-  it('can preserve arrays with no child nodes', () => {
+  it('can output empty array when no child nodes present', () => {
     const result = unfuxml(XmlFixtures.StateSetEmptyList, {
       alwaysArray: ['stateList'],
     });
     expect(result).toHaveProperty('stateList');
-    // @ts-expect-error
-    expect(result.stateList).toHaveLength(0);
+    // @ts-ignore
+    expect(result?.stateList).toHaveLength(0);
   });
 
   it('can preserve arrays with a single child node', () => {
@@ -78,8 +79,15 @@ describe('unfuxml', () => {
       alwaysArray: ['stateList'],
     });
     expect(result).toHaveProperty('stateList');
-    // @ts-expect-error
+    // @ts-ignore
     expect(result?.stateList).toHaveLength(1);
+  });
+  it('can handle mixed-node lists (PolymorphicNodes)', () => {
+    const result = getXmlToJsonStats(XmlFixtures.PolymorphicNodeList, {
+      includeProcessedJson: true,
+      includeRuntime: false,
+    });
+    expect(result).toMatchSnapshot('stats');
   });
 });
 
@@ -123,7 +131,6 @@ describe('getXmlToJsonStats', () => {
     const result = getXmlToJsonStats(XmlFixtures.TransactionMultiRate, myOpt);
     const { rates } = result.output?.transaction?.result;
     // process.stdout.write('Test #3' + JSON.stringify(result, null, 2) + '\n');
-
     expect(typeof result.output.transaction.result).toBe('object');
     expect(Array.isArray(rates)).toBe(true);
     expect(result).toMatchSnapshot('applyUnwrapping');

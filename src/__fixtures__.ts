@@ -7,6 +7,13 @@
  *
  */
 export const XmlFixtures = {
+  /** Awkward jumbling of node types */
+  PolymorphicNodeList: `<?xml version="1.0" encoding="utf-8"?>
+<Plan importance="high" logged="true">
+  <title>Daily tasks</title>
+  <todo>Work</todo>
+  <todo>Play</todo>
+</Plan>`,
   /** Lists example */
   StateList: `<?xml version="1.0" encoding="UTF-8"?>
 <StateList>
