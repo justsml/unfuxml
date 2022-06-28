@@ -9,7 +9,28 @@
 
 ## Why?
 
-> **Unfuxml is the best way to get familiar JSON from XML.**
+> **Unfuxml is the best way to get usable JSON from XML.**
+
+## Smart Object & Array Conversion
+
+```xml
+<Plan importance="high" logged="true">
+  <title>Daily tasks</title>
+  <todo>Work</todo>
+  <todo>Play</todo>
+</Plan>
+```
+
+```json
+{
+  "plan": {
+    "importance": "high",
+    "logged": "true",
+    "title": "Daily tasks",
+    "todo": [ "Work", "Play" ],
+  }
+}
+```
 
 ### The Problem
 
@@ -34,18 +55,18 @@ And "escape hatches" where appropriate.
 
 - [x] One-way conversion.
 - [x] De-nesting of XML's excess nesting.
-- [ ] Key/Node name transformation.
+- [x] Key/Node name transformation.
   - [x] Camel-cases by default.
   - [x] Key rewriting function.
-  - [ ] Removes namespace prefixes, customize the `keyNameFunction` option to override.
-  - [ ] Configurable.
+  - [x] Removes namespace prefixes, customize the `keyNameFunction` option to override.
+  - [x] Configurable.
   - [ ] Supports dictionary for simple remapping of poorly named source data.
-- [ ] Included stats helper functions. Try `import {getXmlToJsonStats} from 'unfuxml';`
+- [x] Included stats helper functions. Try `import {getXmlToJsonStats} from 'unfuxml';`
 - (Test out your XML using [`repl.it`](https://repl.it/) or [`runkit.com/new`](https://runkit.com/new))
 
 ## Usage
 
-- Default [`unfuxml()` function](#unfuxml-).
+- Default [`unfuxml()` function](#unfuxmlxml-options).
 - Helper `getXmlToJsonStats` method.
 
 ### `unfuxml(xml, options)`
@@ -53,7 +74,6 @@ And "escape hatches" where appropriate.
 #### Example #1
 
 ```ts
-import lodash from 'lodash';
 import unfuxml from 'unfuxml';
 
 const xmlString = `<?xml version="1.0" encoding="UTF-8"?>

@@ -6,7 +6,7 @@
     "baseUrl": ".",
 
     "declaration": true,
-    // "declarationMap": true,
+    "declarationMap": true,
     // "declarationDir": "./dist/types",
 
     "esModuleInterop": true,
@@ -28,6 +28,6 @@
     "target": "ES2019",
     "useUnknownInCatchVariables": false
   },
-  "include": ["**/*.ts", "./.*.js"],
-  "exclude": ["**/node_modules", "__snapshots__", "**/dist"]
+  "include": ["**/*.ts", ".eslintrc.js", "jest.config.js"],
+  "exclude": ["node_modules", "__snapshots__", "dist"]
 }
